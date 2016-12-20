@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="design-pattern-oracle">
+    <Basepaths>/oracledb/v1</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1480617545911</CreatedAt>
+    <CreatedBy>kkanaskie@apigee.com</CreatedBy>
+    <DisplayName>design-pattern-oracle</DisplayName>
+    <LastModifiedAt>1480617545911</LastModifiedAt>
+    <LastModifiedBy>kkanaskie@apigee.com</LastModifiedBy>
+    <Policies/>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>node://api-oracle.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

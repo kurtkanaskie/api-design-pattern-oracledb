@@ -1,9 +1,12 @@
 Oracle node js
 ====
-
 Design Pattern for Oracle DB with JDBC proxy.
 
 This repository contains the apiproxy plus local node development artifacts.
+
+This pattern only works for on premise Edge deployments.
+
+Note that the trireme jars are included in the Edge deployment.
 
 ##Dependencies
 ###Node Modules (builtin to v4.15.01.00)
@@ -43,15 +46,15 @@ curl http://localhost:4242/trucks
 
 ##API Proxy 
 ###Deployment Details
+* The api-oracle.js file in the deploy directory is used by the proxy.
+* The ojdbc6.jar is copied to the Message Processor nodes and then the MPs are restarted.
+
 ####Preperation:
-All the files in the deploy directory get bundled up and deployed, only need api-oracle.js
+The api-oracle.js file in the deploy directory is used by the proxy.
 	mkdir deploy
 	cp api-oracle.js deploy
 
 ####Deploy
-	NOTE: Repeated Deploys bump the revision.
-
-	apigeetool deploynodeapp -u "username@apigee.com" -d deploy -e test -n design-pattern-oracle -o domain -m api-oracle.js -b /v1/designPattern/oracle -v default,secure
 	apigeetool deploynodeapp -u "username@apigee.com" -d deploy -e test -n design-pattern-oracle -o domain -m api-oracle.js -b /v1/designPattern/oracle -v default,secure
 
 	"design-pattern-oracle" Revision 1
@@ -60,9 +63,6 @@ All the files in the deploy directory get bundled up and deployed, only need api
 	  base path = /
 	  URI = http://org-test.apigee.net/v1/designPattern/oracle
 	  URI = https://org-test.apigee.net/v1/designPattern/oracle
-###### Local AIO
-    apigeetool deploynodeapp -L http://localhost:32773 -u trial@apigee.com -d deploy -e test -n design-pattern-oracle -o trial -m api-oracle.js -b /oracledb/v1 -v default
-    curl http://localhost:32771/oracledb/v1/status
 
 #####Install ojdbc6.jar
 	Copy the ojdbc6.jar file to: {INST_DIR}/apigee4/data/apigee/custom_jars directory, and restart MP.
@@ -73,9 +73,6 @@ All the files in the deploy directory get bundled up and deployed, only need api
 ####Test
 	curl http://org-test.apigee.net/v1/designPattern/oracle/status
 	curl http://org-test.apigee.net/v1/designPattern/oracle/trucks
-
-####Modify
-	Set password in api-oracle.js to be the Apigee user and password
 
 ####Fetch
 	apigeetool fetchproxy -u "username@domain.com" -o domain -n design-pattern-oracle -r 1 -f design-pattern-oracle-r1.zip
