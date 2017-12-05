@@ -8,12 +8,12 @@ This pattern only works for on premise Edge deployments.
 
 Note that the trireme jars are included in the Edge deployment.
 
-##Dependencies
-###Node Modules (builtin to v4.15.01.00)
+## Dependencies
+### Node Modules (builtin to v4.15.01.00)
  - "trireme": "0.8.5"
  - "trireme-jdbc": "1.0.0"
 
-###Java jars
+### Java jars
  - "ojdbc6.jar"
  - "trireme.0.8.5.jar"
 
@@ -24,37 +24,37 @@ url: 'jdbc:oracle:thin:username@awsrdsname.cgpsf0vdwjun.us-east-1.rds.amazonaws.
 ````
 
 
-##Testing locally
-####Trireme node app
+## Testing locally
+#### Trireme node app
 ````
 	TRIREME_CLASSPATH=`pwd`/ojdbc6.jar  trireme api-oracle.js
 ````
 
-####Trireme java jar
+#### Trireme java jar
 This works with trireme jar file
 ````
 	java -classpath `pwd`/trireme.0.8.5.jar:`pwd`/ojdbc6.jar io.apigee.trireme.shell.Main api-oracle.js
 ````
 
-#####Test:
+##### Test:
 curl http://localhost:4242/trucks
 
-#####Result:
+##### Result:
 ````
 ...
 ````
 
-##API Proxy 
-###Deployment Details
+## API Proxy 
+### Deployment Details
 * The api-oracle.js file in the deploy directory is used by the proxy.
 * The ojdbc6.jar is copied to the Message Processor nodes and then the MPs are restarted.
 
-####Preperation:
+#### Preperation:
 The api-oracle.js file in the deploy directory is used by the proxy.
 	mkdir deploy
 	cp api-oracle.js deploy
 
-####Deploy
+#### Deploy
 	apigeetool deploynodeapp -u "username@apigee.com" -d deploy -e test -n design-pattern-oracle -o domain -m api-oracle.js -b /v1/designPattern/oracle -v default,secure
 
 	"design-pattern-oracle" Revision 1
@@ -64,20 +64,20 @@ The api-oracle.js file in the deploy directory is used by the proxy.
 	  URI = http://org-test.apigee.net/v1/designPattern/oracle
 	  URI = https://org-test.apigee.net/v1/designPattern/oracle
 
-#####Install ojdbc6.jar
+##### Install ojdbc6.jar
 	Copy the ojdbc6.jar file to: {INST_DIR}/apigee4/data/apigee/custom_jars directory, and restart MP.
 		scp ojdbc6.jar test-mp:/apigee/tst/apigee4/data/apigee/custom_jars
 		ssh test-mp chmod 755 /apigee/tst/apigee4/data/apigee/custom_jars/ojdbc6.jar
 		ssh test-mp apigee/tst/apigee4/bin/apigee-service message-processor restart
 
-####Test
+#### Test
 	curl http://org-test.apigee.net/v1/designPattern/oracle/status
 	curl http://org-test.apigee.net/v1/designPattern/oracle/trucks
 
-####Fetch
+#### Fetch
 	apigeetool fetchproxy -u "username@domain.com" -o domain -n design-pattern-oracle -r 1 -f design-pattern-oracle-r1.zip
 
-##Using AWS RDS for Oracle
+## Using AWS RDS for Oracle
 ENDPOINT FROM CONSOLE: awsname.cgpsf0vdwjun.us-east-1.rds.amazonaws.com:1521
 
 ````
@@ -89,7 +89,7 @@ SQL> grant read on trucks to public;
 
 ````
 
-##TODO
+## TODO
 Execute stored procedure via API.
 
 ````
