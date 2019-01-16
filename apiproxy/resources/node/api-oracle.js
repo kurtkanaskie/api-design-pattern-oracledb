@@ -8,10 +8,10 @@ var jdbc = require('trireme-jdbc');
 app.use(express.bodyParser({ keepExtensions: true}));
 
 var db = new jdbc.Database({
-	url: 'jdbc:oracle:thin:kurtkanaskie@kurtkanaskie.cgpsf0vdwjun.us-east-1.rds.amazonaws.com:1521/ORCL',
+	url: 'jdbc:oracle:thin:db-username@YOURHOST.cgpsf0vdwjun.us-east-1.rds.amazonaws.com:1521/ORCL',
 	properties: {
-		user: 'kurtkanaskie',
-		password: 'Fuffy20!6',
+		user: 'db-username',
+		password: 'db-password',
 	},
 	minConnections: 1,
 	maxConnections: 20,
